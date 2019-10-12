@@ -1,0 +1,68 @@
+\newpage{}
+\section{Basics of Neural Network Programming}
+
+
+%============================================
+\subsection{Binary Classification}
+\subsubsection{Binary Classification}
+image $\rightarrow$ 1 (cat) vs 0 (non cat)
+
+\subsubsection{Notation}
+%\begin{align}
+	$m$: number of examples
+
+	$n_x$: input size
+
+	$n_y$: output size
+
+	$x$: input, column vector
+
+	$y$: output, 0/1
+
+	$X$: input matrix, shape = $(n_x, m)$
+
+	$Y$: output matrix, shape = $(1, m)$
+
+%\end{align}
+
+
+%============================================
+\subsection{Logistic Regression}
+Given:
+	$x \in \mathbb{R}^{n_x}$, $0 \le \hat{y} \le 1$
+
+Parameters: 
+	$w \in \mathbb{R}^{n_x}$, $b \in \mathbb{R}$
+
+Output: 
+\begin{align}
+	z = w^Tx + b   \\
+	\hat{y} = \sigma{(z)} \\
+	\sigma{(z)} \approx \frac{1}{1 + e^{-z}} \\
+	z \approx \infty, \sigma{(z)} \approx \frac{1}{1 + 0} = 1 \\
+	z \approx -\infty, \sigma{(z)} \approx \frac{1}{1 + \infty} = 0
+\end{align}
+
+Simplified Parameters:
+	$x_0 = 1$, $x \in \mathbb{R}^{{n_x} + 1}$
+
+\begin{align}
+	\theta_0 = b, \theta_1 ... \theta_{n_x} = w \\
+	\theta = \begin{bmatrix} 
+				\theta_0 \\
+				\theta_1 \\
+				\theta_2 \\
+				...      \\
+				\theta_{n_x} \\
+	         \end{bmatrix} \\
+	\hat{y} = \sigma{(\theta^Tx)}
+\end{align}
+
+
+%============================================
+\subsection{Logistic Regression cost function}
+
+Given $\{ (x^{(1)}, y^{(1)}, ..., (x^{(m)}, y^{(m)} \}$,
+want $\hat{y}^{(i)} \approx {y}^{(i)}$.
+
+Loss (error) function:
