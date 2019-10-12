@@ -1,0 +1,38 @@
+%document class
+\documentclass{article}
+
+
+%package
+\usepackage{ctex}      % 中文支持
+\usepackage{amsmath}   % Advanced math typesetting
+\usepackage{hyperref}  % Add a link to your document
+\usepackage{graphicx}  % Add pictures to your document
+\usepackage{subcaption}% Add sub figure support
+\usepackage{listings}  % Source code formatting and highlighting
+\usepackage[backend=bibtex]{biblatex} % Use biblatex package
+%\bibliography{cite}	    % Cite database name
+
+
+%document body
+\begin{document}
+
+%============================================
+\title{Stanford CS230 Notes}
+\author{}
+\date{}
+\maketitle{}          % Generate title
+
+
+%contents 目录
+%\renewcommand{\contentsname}{\centering 目录}
+%\tableofcontents{}    % Generate contents
+
+
+\input{c1m1}
+
+%bibliography
+\newpage{}
+\printbibliography
+
+%============================================
+\end{document}
