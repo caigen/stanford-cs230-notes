@@ -23,6 +23,7 @@ image $\rightarrow$ 1 (cat) vs 0 (non cat)
 
 	$Y$: output matrix, shape = $(1, m)$
 
+	$x^{(i)}$: superscript (i) will denote the $i^{th}$ example.
 %\end{align}
 
 
@@ -65,4 +66,38 @@ Simplified Parameters:
 Given $\{ (x^{(1)}, y^{(1)}, ..., (x^{(m)}, y^{(m)} \}$,
 want $\hat{y}^{(i)} \approx {y}^{(i)}$.
 
-Loss (error) function:
+Loss (error) function (mean square error/cross entropy):
+\begin{align}
+	\mathcal{L}(\hat{y}, y) = \frac{1}{2}(\hat{y} - y)^2  \\
+	\mathcal{L}(\hat{y}, y) = -(y\log{\hat{y}} + (1-y)\log(1 - \hat{y}))
+\end{align}
+
+If y = 1: $\mathcal{L}(\hat{y}, y) = -\log{\hat{y}}$, 
+want $\mathcal{L}$ small, want $\hat{y}$ large, want $\hat{y}$ equal to 1.  
+If y = 0: $\mathcal{L}(\hat{y}, y) = -\log{(1 - \hat{y})}$,
+want $\mathcal{L}$ small, want $\hat{y}$ small, want  $\hat{y}$ equal to 0. 
+
+
+Cost function:
+\begin{align}
+	J(w, b) = \frac{1}{m} \displaystyle\sum_{i=1}^m \mathcal{L}(\hat{y}, y) \\
+	J(w, b) = - \frac{1}{m} \displaystyle\sum_{i=1}^m [y^{(i)}\log{\hat{y}^{(i)}} + (1 - y^{(i)})\log{1 - \hat{y}^{(i)}}]
+\end{align}
+
+Given a random variable $X$ with probability mass function $p_X(x)$, 
+the self information of measuring $X$ as outcome $x$ is defined as：
+\begin{align}
+	I_X(x) = \log[p_X(x)] = \log(\frac{1}{p_X(x)})
+\end{align}
+
+Shannon Entroy of $X$:
+\begin{align}
+	H(X) = \sum_{x} -p_X(x)\log{p_X(x)} \\
+	= \sum_{x} p_X(x)I_X(x) \\
+	= E[I_X(x)]
+\end{align}
+
+Cross Entropy of the the true distributions $p$ and estimated distribution $q$:
+\begin{align}
+	H(p, q) = E_p[-\log{q}] = -\sum_{x \in \mathcal X} p(x) \log{q(x)}
+\end{align}
