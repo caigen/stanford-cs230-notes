@@ -160,3 +160,34 @@ a = 5, b = 3, c = 2
 	&= 3 * 3 \\
 	&= 9
 \end{align}
+
+
+%============================================
+\subsection{Logistic Regression Gradient Descent}
+\subsubsection{Logicstic regression recap}
+\begin{align}
+	&z = w^Tx + b \\
+	&\hat{y} = a = \sigma(a) \\
+	&\mathcal{L}(a, y) = -(y\log(a) + (1-y)\log(1 - a))
+\end{align}
+
+\subsubsection{Logistic regression derivatives}
+$z = w_1 x_1 + w_2 x_2 + b \rightarrow a = \sigma(z) \rightarrow \mathcal L (a, y)$
+\begin{align}
+	\mathrm{d} a &= \frac{\mathrm{d} \mathcal{L}(a, y)} {\mathrm{d} a} \\
+					&= -(\frac{y}{a} + \frac{1 - y}{1 - a}) \\
+	\mathrm{d} z &= \frac{\mathrm{d} \mathcal{L}(a, y)} {\mathrm{d} z} \\
+			      &= \frac{\mathrm{d} \mathcal{L}} {\mathrm{d} a} * \frac{\mathrm{d} a} {\mathrm{d} z} \\
+	\mathrm{d} w_1 &= x_1 * \mathrm{d} z \\
+	\mathrm{d} w_2 &= x_2 * \mathrm{d} z \\
+	\mathrm{d} b &= \mathrm{d} z
+\end{align}
+
+
+Repeat:
+\begin{align}
+	w_1 &:= w_1 - \alpha \mathrm{d} w_1 \\
+	w_2 &:= w_2 - \alpha \mathrm{d} w_2 \\
+	  b &:= b - \alpha \mathrm{d} b
+\end{align}
+
