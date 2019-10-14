@@ -175,9 +175,14 @@ a = 5, b = 3, c = 2
 $z = w_1 x_1 + w_2 x_2 + b \rightarrow a = \sigma(z) \rightarrow \mathcal L (a, y)$
 \begin{align}
 	\mathrm{d} a &= \frac{\mathrm{d} \mathcal{L}(a, y)} {\mathrm{d} a} \\
-					&= -(\frac{y}{a} + \frac{1 - y}{1 - a}) \\
+					&= -\frac{y}{a} + \frac{1 - y}{1 - a} \\
 	\mathrm{d} z &= \frac{\mathrm{d} \mathcal{L}(a, y)} {\mathrm{d} z} \\
 			      &= \frac{\mathrm{d} \mathcal{L}} {\mathrm{d} a} * \frac{\mathrm{d} a} {\mathrm{d} z} \\
+					&= (-\frac{y}{a} + \frac{1 - y}{1 - a}) * a * (1 - a) \\
+				   &= -(1-a)y + a(1-y) \\
+                &= a - y \\
+	\frac{\mathrm{d} a} {\mathrm{d} z} &= a * (1 - a) \\
+		&= \frac{1}{1 + e^{-z}} * (1 - \frac{1}{1 + e^{-z}}) \\
 	\mathrm{d} w_1 &= x_1 * \mathrm{d} z \\
 	\mathrm{d} w_2 &= x_2 * \mathrm{d} z \\
 	\mathrm{d} b &= \mathrm{d} z
@@ -191,3 +196,91 @@ Repeat:
 	  b &:= b - \alpha \mathrm{d} b
 \end{align}
 
+
+%============================================
+\subsection{Gradient Descent on $m$ examples}
+\begin{align}
+	J(w, b) &= \frac{1}{m} \sum_{i = 1}^{m} \mathcal{L}(a^{(i)}, y{(i)}) \\
+	\frac{\mathrm{d}} {\mathrm{d}w_1} J(w, b) &= \frac{1}{m} \sum_{i = 1}^{m} 
+		\frac{\mathrm{d}} {\mathrm{d}w_1} \mathcal{L}(a^{(i)}, y{(i)}) \\
+	&= \frac{1}{m} \sum_{i = 1}^{m} \mathrm{d}w_1^{(i)}
+\end{align}
+
+
+%============================================
+\subsection{Vectorization}
+Vectorized, for GPU.
+\begin{lstlisting}[language={python},tabsize=4]
+	z = np.dot(w, x) + b
+\end{lstlisting}
+
+
+%============================================
+\subsection{More Vectorization Examples}
+\subsubsection{Neural network programming guideline}
+Whenever possible, avoid explicit for-loops.
+\begin{lstlisting}[language={python},tabsize=4]
+	u = np.dot(A, x)
+\end{lstlisting}
+
+\subsubsection{Vectors and matrix valued functions}
+\begin{lstlisting}[language={python},tabsize=4]
+	import numpy as np
+	
+	u = np.exp(v)
+	np.log(v)
+	np.abs(v)
+	np.maximum(v, 0)
+	np.pow(v, 2)
+	np.divide(1, v)
+\end{lstlisting}
+
+
+%============================================
+\subsection{Vectorizing Logistic Regression}
+
+
+%============================================
+\subsection{Vectorizing Logistic Regression's Gradient Computation}
+
+
+%============================================
+\subsection{Broadcasting in Python}
+\begin{lstlisting}[language={python},tabsize=4]
+	np.add((1.0, 2.0), 2.0)   # (3.0, 4.0)
+\end{lstlisting}
+
+
+%============================================
+\subsection{Explanation of logistic regression cost function (Optional)}
+\subsubsection{Logistic regression cost function}
+$\hat{y} = \sigma(w^Tx + b)$ where $\sigma(z) = \frac{1}{1 + e^{-z}}$
+\begin{align}
+	\hat{y} = p(y = 1 | x)
+\end{align}
+
+
+If $y = 1$: $p(y|x) = \hat{y}$
+
+If $y = 0$: $p(y|x) = 1 - \hat{y}$
+
+\begin{align}
+	p(y|x) &= \hat{y}^y (1-\hat{y})^{(1-y)} \\
+	y = 1: p(y|x) &= \hat{y} \\
+	y = 0: p(y|x) &= 1 - \hat{y} \\
+	\log_{}{p(y|x)} &= y\log_{}{\hat{y}} + (1-y)\log_{}{1 - \hat{y}} \\
+					   &= -\mathcal{L}(\hat{y}, y)
+\end{align}
+
+
+\subsubsection{Cost on $m$ examples}
+Maximum likehood estimation:
+\begin{align}
+	\log_{}{p(...)} &= \sum_{i = 1}^{m} -\mathcal{L}(\hat{y}, y) \\
+					   &= -\sum_{i = 1}^{m} \mathcal{L}(\hat{y}, y)
+\end{align}
+
+Minimize cost:
+\begin{align}
+	J(w, b) = \frac{1}{m} \displaystyle\sum_{i=1}^m \mathcal{L}(\hat{y}, y)
+\end{align}
