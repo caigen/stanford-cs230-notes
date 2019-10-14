@@ -92,9 +92,9 @@ the self information of measuring $X$ as outcome $x$ is defined as：
 
 Shannon Entroy of $X$:
 \begin{align}
-	H(X) = \sum_{x} -p_X(x)\log{p_X(x)} \\
-	= \sum_{x} p_X(x)I_X(x) \\
-	= E[I_X(x)]
+	H(X) &= \sum_{x} -p_X(x)\log{p_X(x)} \\
+	&= \sum_{x} p_X(x)I_X(x) \\
+	&= E[I_X(x)]
 \end{align}
 
 Cross Entropy of the the true distributions $p$ and estimated distribution $q$:
@@ -126,4 +126,37 @@ $\alpha$: learning rate
 	f(x) = \log_a{x}, \frac{\mathrm{d}}{\mathrm{d} x} f(x) = \frac{1}{x\ln{a}} \\
 	f(x) = a^x, \frac{\mathrm{d}}{\mathrm{d} x} f(x) = a^x \ln{a} \\
 	\log_a{b} = \frac{\log_c{b}}{\log_c{a}} = \frac{\ln{a}}{\ln{b}}
+\end{align}
+
+
+%============================================
+\subsection{Computation Graph}
+\begin{align}
+	J(a, b, c) &= 3(a + bc) \\
+	&= 3(a + u) \\
+	&= 3v \\
+	u &= bc \\
+	v &= a + u \\
+	J &= 3v 
+\end{align}
+
+
+%============================================
+\subsection{Derivatives with a Computation Graph}
+a = 5, b = 3, c = 2
+\begin{align}
+	\frac{\mathrm{d}J}{\mathrm{d}v} &= 3 \\
+	\frac{\mathrm{d}J}{\mathrm{d}a} &= \frac{\mathrm{d}J}{\mathrm{d}v} \frac{\mathrm{d}v}{\mathrm{d}a} \\
+	&= 3 * 1 \\
+	&= 3 \\
+	\frac{\mathrm{d}J}{\mathrm{d}u} &= \frac{\mathrm{d}J}{\mathrm{d}v} \frac{\mathrm{d}v}{\mathrm{d}u} \\ 
+	&= 3 \\
+	\frac{\mathrm{d}J}{\mathrm{d}b} &= \frac{\mathrm{d}J}{\mathrm{d}u} \frac{\mathrm{d}u}{\mathrm{d}b} \\
+	&= 3 * c \\
+	&= 3 * 2 \\
+	&= 6 \\
+	\frac{\mathrm{d}J}{\mathrm{d}c} &= \frac{\mathrm{d}J}{\mathrm{d}u} \frac{\mathrm{d}u}{\mathrm{d}c} \\
+	&= 3 * b \\
+	&= 3 * 3 \\
+	&= 9
 \end{align}
