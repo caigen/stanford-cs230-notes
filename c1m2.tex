@@ -101,3 +101,29 @@ Cross Entropy of the the true distributions $p$ and estimated distribution $q$:
 \begin{align}
 	H(p, q) = E_p[-\log{q}] = -\sum_{x \in \mathcal X} p(x) \log{q(x)}
 \end{align}
+
+
+%============================================
+\subsection{Gradient Descent}
+Want to find w, b that minimize $J(w, b)$.
+
+Repeat:
+\begin{align}
+	w := w - \alpha \frac{\mathrm{d} J(w,b)}{\mathrm{d} w} \\
+	b := b - \alpha \frac{\mathrm{d} J(w,b)}{\mathrm{d} b}
+\end{align}
+
+$\alpha$: learning rate
+
+
+%============================================
+\subsection{Derivatives}
+\begin{align}
+	f(a) = 3a, \frac{\mathrm{d} f(a)}{\mathrm{d} a} = 3 = \frac{\mathrm{d}}{\mathrm{d} a} f(a) \\
+	f(a) = a^2, \frac{\mathrm{d}}{\mathrm{d} a} f(a) = 2a \\
+	f(a) = a^3, \frac{\mathrm{d}}{\mathrm{d} a} f(a) = 3a^2 \\
+	f(a) = \log_e{a} = \ln{a}, \frac{\mathrm{d}}{\mathrm{d} a} f(a) = \frac{1}{a} \\
+	f(x) = \log_a{x}, \frac{\mathrm{d}}{\mathrm{d} x} f(x) = \frac{1}{x\ln{a}} \\
+	f(x) = a^x, \frac{\mathrm{d}}{\mathrm{d} x} f(x) = a^x \ln{a} \\
+	\log_a{b} = \frac{\log_c{b}}{\log_c{a}} = \frac{\ln{a}}{\ln{b}}
+\end{align}
